@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+    <body>
+        <h1 class="titulo">POKEMON</h1>
+        <section id="elige-mascota">            
+            <h2 class="subtitulo">Elique tu mascota</h2>  
+
+            <div id="tarjeta-pokemones", class="tarjetas"> 
+           </div>
+
+            <button id="boton-mascota">Seleccionar</button>
+        </section>
+
+        <section id="ver-mapa">
+            <h2 class="subtitulo">Recorre el mapa con tu mascota</h2> 
+
+            <canvas id="mapa"></canvas>
+
+            <div>
+                <button 
+                onmouseup="detenerMovimiento()" 
+                onmousedown="moverArriba()"
+                ontouchend="detenerMovimiento()" 
+                ontouchstart="moverArriba()"
+                >Arriba</button> 
+            </div>
+            <div>
+                <button 
+                onmouseup="detenerMovimiento()" 
+                onmousedown="moverIzquierda()"
+                ontouchend="detenerMovimiento()" 
+                ontouchstart="moverIzquierda()"
+                >Izquierda</button> 
+                <button 
+                onmouseup="detenerMovimiento()" 
+                onmousedown="moverDerecha()"
+                ontouchend="detenerMovimiento()" 
+                ontouchstart="moverDerecha()"
+                >Derecha</button> 
+                
+            </div>
+            <div>
+                <button 
+                onmouseup="detenerMovimiento()" 
+                onmousedown="moverAbajo()"
+                ontouchend="detenerMovimiento()" 
+                ontouchstart="moverAbajo()"
+                >Abajo</button> 
+            </div>
+        
+        </section>
+
+        <section id="seleccionar-ataques">
+            <h2 class="subtitulo">Elige tus ataques</h2>
+
+            <div id="seccion-ataques" class="botones-ataques">                
+            </div>
+            
+            <div id="resultado-ataque"> 
+                <p id="resultado">Mucha suerte</p>
+            </div>
+        </section>
+        
+        <section id="reiniciar">
+            <button id="botonReiniciar">Vuelve a jugar</button>
+        </section>  
+
+        <section id="batalla">
+            <section class="seccion-jugadores">
+                <p id="tuRival">Tu:</p>
+                <p id="mascotaJugador"></p>
+                <p id="vidasJugador">⚔️ 0 victorias</p>
+                <div id="ataque-jugador"></div>
+            </section>
+
+            <section class="seccion-jugadores">
+                <p id="tuRival">Rival:</p>
+                <p id="mascotaEnemigo"></p>
+                <p id="vidasEnemigo">⚔️ 0 victorias</p>
+                <div id="ataque-enemigo">
+            </section>
+        </section>            
+        <script src="./js/pokemon.js"></script>
+    </body>
+</html>

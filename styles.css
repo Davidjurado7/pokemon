@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&family=Rubik+Puddles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+
+body {
+    background-color: #86C8BC;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Abril Fatface', cursive;
+}
+
+.titulo {
+    font-size: 100px;
+    text-align: center;
+    color: #FFF6BD;
+    font-family: 'Rubik Puddles', cursive;
+    margin: 20px 0px 0px 20px;
+}
+
+.subtitulo {
+    font-size: 60px;
+    text-align: center;
+    color: #FFD4B2;
+}
+
+h2 {
+    margin: 10px;
+    margin-block-start: 25px;
+    font-size: 35px;
+}
+
+.tarjetas{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 50px;
+
+}
+.tarjetas img {
+    width: 126px;
+}
+
+input {
+    display: none;
+}
+
+input:checked + label {
+    background-color: #FFD4B2;
+}
+
+button:hover  {
+    background-color: #FFD4B2;
+}
+
+#elige-mascota {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.caja-mascotas {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    background: #CEEDC7;
+    color: white;
+    box-sizing: border-box;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 32px;
+}
+
+#boton-mascota {
+    width: 170px;
+    height: 50px;
+    margin: 38px;
+    font-size: 25px;
+    font-style: oblique;
+    border: 1px solid white;
+    background: #CEEDC7;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Boogaloo', cursive;
+
+}
+
+#ver-mapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#mapa {
+    border: 2px solid #CEEDC7;
+}
+
+#seleccionar-ataques {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.botones-ataques {
+    display: flex;
+}
+
+.botonAtaques {
+    width: 170px;
+    height: 50px;
+    margin: 15px;
+    font-size: 25px;
+    font-style: oblique;
+    border: 1px solid white;
+    background: #CEEDC7;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Boogaloo', cursive;
+}
+
+
+#resultado-ataque {
+    margin: 25px;
+    display: flex;
+    background: #CEEDC7;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: 30px;    
+}
+
+#botonReiniciar {
+    width: 170px;
+    height: 50px;
+    margin: 14px;
+    font-size: 28px;
+    font-style: oblique;
+    border: transparent;
+    background: #FFD4B2;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Boogaloo', cursive;
+}
+
+.seccion-jugadores {    
+    border-radius: 20px;
+    background: #CEEDC7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid white;
+    font-family: 'Boogaloo', cursive;
+    color: white;
+    font-size: 30px;
+    width: 250px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#batalla {
+    gap: 40px;
+    display: flex;
+}
+
+#mascotaJugador {
+    font-size: 58px;
+    margin: 0px;
+    color: white;
+}
+
+#mascotaEnemigo {
+    font-size: 58px;
+    margin: 0px;
+    color: white;
+}
+
+#vidasJugador {
+    font-size: 40px;
+    margin-top: 5px;
+    color: indianred;
+}
+
+#vidasEnemigo {
+    font-size: 40px;
+    margin-top: 5px;
+    color: indianred;
+}
+
+#tuRival {   
+    margin: 0px;
+}
+
+#ver-mapa button {
+    width: 115px;
+    height: 50px;
+    margin: 6px;
+    font-size: 25px;
+    font-style: oblique;
+    border: 1px solid white;
+    background: #CEEDC7;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Boogaloo', cursive;
+}
+
+
+@media (max-width: 700px) {
+    .tarjetas, .botones-ataques, #batalla {
+        display: flex;
+        flex-direction: column;
+    }
+    .botonAtaques {
+        margin: 5px; 
+    }
+    #resultado-ataque {
+        margin: 30px 
+    }
+}
