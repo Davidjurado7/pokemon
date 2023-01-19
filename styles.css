@@ -136,7 +136,7 @@ button:hover  {
     border: 1px solid;
     border-radius: 20px;
     padding: 10px;
-    width: 200px;
+    width: auto;
     height: 50px;
     font-size: 30px;    
 }

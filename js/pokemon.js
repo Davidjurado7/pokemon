@@ -95,6 +95,9 @@ let ratigueya = new Pokemon("Ratigueya", "./assets/mokepons_mokepon_ratigueya_at
 let langostelvis = new Pokemon("Langostelvis", "./assets/mokepons_mokepon_langostelvis_attack.png", "6", "./assets/mokepons_mokepon_langostelvis_attack.png")
 let pydos = new Pokemon("Pydos", "./assets/mokepons_mokepon_pydos_attack.webp", "6", "./assets/mokepons_mokepon_pydos_attack.webp")
 let tucapalma = new Pokemon("Tucapalma", "./assets/mokepons_mokepon_tucapalma_attack.webp", "7", "./assets/mokepons_mokepon_tucapalma_attack.webp")
+let hipodogeEnemigo = new Pokemon("Hipodoge", "./assets/mokepons_mokepon_hipodoge_attack.png", "5", "./assets/hipodoge.png")
+let capipepoEnemigo = new Pokemon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", "5", "./assets/capipepo.png")
+let ratigueyaEnemigo = new Pokemon("Ratigueya", "./assets/mokepons_mokepon_ratigueya_attack.png", "7", "./assets/ratigueya.png")
 
 
 hipodoge.ataques.push(
@@ -178,20 +181,6 @@ function iniciarJuego() {
     inputPidos.addEventListener("click", comprobarSeleccion)
     inputTucapalma.addEventListener("click", comprobarSeleccion)
 
-    unirseAlJuego()
-}
-
-function unirseAlJuego() {
-    fetch("http://macbook-pro-de-david.local:8080/unirse")
-    .then(function(res){
-        if (res.ok) {
-            res.text()
-                .then(function(respuesta) {
-                    console.log(respuesta)
-                    jugadorId = respuesta
-                })
-        }
-    })
 }
 
 function comprobarSeleccion() {
@@ -227,8 +216,6 @@ function selecionarMascotaJugador() {
             alert("Debe seleccionar una mascota")
         }
 
-        seleccionarPokemon(mascotaJugador)
-
         sectionSelecionarAtaques.style.display = "none"
         sectionBatalla.style.display = "none"
         sectionMapa.style.display = "flex"
@@ -236,18 +223,6 @@ function selecionarMascotaJugador() {
         iniciarMapa()
 
         extraerAtaques(mascotaJugador)
-}
-
-function seleccionarPokemon(mascotaJugador) {
-    fetch(`http://macbook-pro-de-david.local:8080/pokemon/${jugadorId}`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            pokemon: mascotaJugador
-        })
-    })
 }
 
 function selecionarMascotaEnemigo(enemigo) {    
@@ -300,68 +275,32 @@ function secuenciaAtaque() {
                 boton.style.background = '#112f58'
                 boton.disabled = true
             }
-            if (ataqueJugador.length === 5) {
-                enviarAtaques()
-            }
-            
+            ataqueAleatorioEnemigo()            
         })
     })
-}
-
-function enviarAtaques () {
-    console.log("enviar ataques", ataqueJugador)
-
-    fetch(`http://macbook-pro-de-david.local:8080/pokemon/${jugadorId}/ataques`, {
-        method: "post",
-        headers: {
-            "Content-Type": "aplication/json"
-        },
-        body: JSON.stringify({
-            ataques: ataqueJugador
-        })
-    })
-
-    intervalo = setInterval(obtenerAtaques, 50)
-}
-
-function obtenerAtaques() {
-    console.log("OBTENER ATAQUES")
-
-    fetch(`http://macbook-pro-de-david.local:8080/pokemon/${enemigoId}/ataques`)
-        .then(function (res) {
-            if (res.ok) {
-                res.json()
-                    .then(function ({ ataques }) {
-                        if (ataques.length === 5) {
-                            ataqueEnemigo = ataques
-                            batalla()
-                        }
-                    })
-            }
-        })
 }
 
 function numeroaleatorio(min, max) {
         return Math.floor(Math.random() * (max - min) + min)
 }  
 
-// function ataqueAleatorioEnemigo() {
-//         let ataqueAleatorio = numeroaleatorio(3,1)
+function ataqueAleatorioEnemigo() {
+        let ataqueAleatorio = numeroaleatorio(3,1)
     
-//         if(ataqueAleatorio == 1) {
-//             ataqueEnemigo.push("FUEGO")
-//         } else if (ataqueAleatorio == 2) {
-//             ataqueEnemigo.push("AGUA")
-//         } else if (ataqueAleatorio == 3) {
-//             ataqueEnemigo.push("TIERRA")
-//         } 
-//         comprobarNumeroAtaques();        
-//     }
+        if(ataqueAleatorio == 1) {
+            ataqueEnemigo.push("FUEGO")
+        } else if (ataqueAleatorio == 2) {
+            ataqueEnemigo.push("AGUA")
+        } else if (ataqueAleatorio == 3) {
+            ataqueEnemigo.push("TIERRA")
+        } 
+        comprobarNumeroAtaques();        
+    }
 
-// function comprobarNumeroAtaques () {
-//         if (ataqueJugador.length === 5)
-//         batalla() 
-// }
+function comprobarNumeroAtaques () {
+        if (ataqueJugador.length === 5)
+        batalla() 
+}
 
 function mostrarAmbosAtaques (jugador, enemigo) {
     indexJugador = ataqueJugador[jugador]
@@ -437,57 +376,15 @@ function pintarCanvas() {
         mapa.height,
     )
     mascotaJugadorObjeto.pintarPokemon()
+    hipodogeEnemigo.pintarPokemon()
+    capipepoEnemigo.pintarPokemon()
+    ratigueyaEnemigo.pintarPokemon()
 
-    enviarPosicion(mascotaJugadorObjeto.x, mascotaJugadorObjeto.y)
-
-    pokemonesEnemigos.forEach(function(pokemon) {
-        pokemon.pintarPokemon()
-        revisarColision(pokemon)
-    })
-}
-
-function enviarPosicion(x, y) {
-    fetch(`http://macbook-pro-de-david.local:8080/pokemon/${jugadorId}/posicion`, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            x,
-            y
-        })
-    })
-     .then(function (res) {
-        if (res.ok) {
-            res.json()
-                .then(function ({ enemigos }){ 
-                    console.log(enemigos)
-                    pokemonesEnemigos = enemigos.map(function (enemigo) {
-                        let pokemonEnemigo = null
-                        const pokemonNombre = enemigo.pokemon.nombre || ""
-                        if (pokemonNombre === "Hipodoge") {
-                             pokemonEnemigo = new Pokemon("Hipodoge", "./assets/mokepons_mokepon_hipodoge_attack.png", "5", "./assets/hipodoge.png", enemigo.id) 
-                        } else if (pokemonNombre === "Capipepo") {
-                             pokemonEnemigo = new Pokemon("Capipepo", "./assets/mokepons_mokepon_capipepo_attack.png", "5", "./assets/capipepo.png", enemigo.id)
-                        } else if (pokemonNombre === "Ratigueya") {
-                             pokemonEnemigo = new Pokemon("Ratigueya", "./assets/mokepons_mokepon_ratigueya_attack.png", "7", "./assets/ratigueya.png", enemigo.id)
-                        } else if ( pokemonNombre === "Langostelvis") {
-                             pokemonEnemigo = new Pokemon("Langostelvis", "./assets/mokepons_mokepon_langostelvis_attack.png", "6", "./assets/mokepons_mokepon_langostelvis_attack.png", enemigo.id)
-                        } else if ( pokemonNombre === "Pydos") {
-                             pokemonEnemigo = new Pokemon("Pydos", "./assets/mokepons_mokepon_pydos_attack.webp", "6", "./assets/mokepons_mokepon_pydos_attack.webp", enemigo.id)        
-                        } else if ( pokemonNombre === "Tucapalma") {
-                             pokemonEnemigo = new Pokemon("Tucapalma", "./assets/mokepons_mokepon_tucapalma_attack.webp", "7", "./assets/mokepons_mokepon_tucapalma_attack.webp", enemigo.id)
-                        }
-
-                        pokemonEnemigo.x = enemigo.x
-                        pokemonEnemigo.y = enemigo.y
-
-                        return pokemonEnemigo
-
-                    })                   
-                })
-        }
-     })
+    if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) {
+        revisarColision(hipodogeEnemigo)
+        revisarColision(capipepoEnemigo)
+        revisarColision(ratigueyaEnemigo)
+    }
 }
 
 
