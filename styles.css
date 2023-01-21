@@ -229,4 +229,10 @@ button:hover  {
     #resultado-ataque {
         margin: 30px 
     }
+    .titulo{
+        font-size: 65px;
+    }
+    .subtitulo {
+        font-size: 50px;
+    }
 }
